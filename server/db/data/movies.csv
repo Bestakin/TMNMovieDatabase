@@ -1,0 +1,11 @@
+movie_id,title,duration,year,age_rating,rank,summary
+1,The Shawshank Redemption,142,1994,R,93,"Two imprisoned men bond over several years, finding solace and eventual redemption through acts of common decency."
+2,The Godfather,175,1972,R,92,"An offer you can't refuse."
+3,Pulp Fiction,154,1994,R,94,"You won't know the facts until you've seen the fiction."
+4,The Dark Knight,152,2008,PG-13,90,"Why so serious?"
+5,Schindler's List,195,1993,R,89,"Whoever saves one life, saves the world entire."
+6,Forrest Gump,142,1994,PG-13,82,"Life is like a box of chocolates."
+7,Inception,148,2010,PG-13,88,"Your mind is the scene of the crime."
+8,The Matrix,136,1999,R,87,"Welcome to the real world."
+9,Fight Club,139,1999,R,86,"The first rule of Fight Club is: You do not talk about Fight Club."
+10,Goodfellas,146,1990,R,88,"Three decades of life in the mafia."

@@ -5,8 +5,10 @@ const imageBaseURL = "https://image.tmdb.org/t/p/";
 
 // Fetch data from a server using the 'url' and pass the result in JSON data to a 'callback' function along with an optional parameter if has 'optionalParam'
 
-const fetchDataFromServer = function (url, callback, optionalParam) {
-  fetch(url)
+
+const fetchDataFromServer = function (command, callback, optionalParam) {
+  // const url = "http://localhost:3000/";
+  fetch(command)
     .then((response) => response.json())
     .then((data) => callback(data, optionalParam));
 };
