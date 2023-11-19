@@ -146,7 +146,7 @@ const heroBanner = function ({ data }) {
 
     // fetch data from home page sections (top rated, upcoming,trending).
     for (const { title, path } of homePageSections) {
-        fetchDataFromServer("movies", createMovieList, title);
+        fetchDataFromServer(path, createMovieList, title);
     }
 };
 

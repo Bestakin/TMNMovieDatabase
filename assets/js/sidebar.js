@@ -44,7 +44,7 @@ export function sidebar() {
             link.setAttribute("menu-close", "");
             link.setAttribute(
                 "onclick",
-                `getMovieList("with_genres=${genreId}", "${genreName}")`
+                `getMovieList("${genreId}", "${genreName}")`
             );
             link.textContent = genreName;
             sidebarInner.querySelectorAll(".sidebar-list")[0].appendChild(link);

@@ -7,7 +7,7 @@ JOIN projectdb.movie m ON r.movie_id = m.movie_id;
 
 -- Actors with multiple roles (view 2)
 CREATE VIEW projectdb.ActorsWithMultipleRoles AS
-SELECT c.actor_id, a.fname, a.lname, 
+SELECT c.actor_id, a.fname, a.lname,
        COUNT(*) AS number_of_roles
 FROM projectdb.cast c
 JOIN projectdb.actor a ON c.actor_id = a.actor_id
@@ -84,3 +84,10 @@ CREATE VIEW projectdb.MoviesByAgeRating AS
 SELECT age_rating, COUNT(movie_id) AS movie_count
 FROM projectdb.movie
 GROUP BY age_rating;
+
+-- Group movies by genres
+CREATE VIEW projectdb.moviesbygenres AS
+SELECT g.genre_id, g.genre_name, GROUP_CONCAT(m.movie_id) AS movie_id
+FROM projectdb.genre g
+LEFT JOIN projectdb.movie m ON g.genre_id = m.genre_id
+GROUP BY g.genre_id, g.genre_name;
