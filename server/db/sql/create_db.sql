@@ -9,7 +9,7 @@ CREATE TABLE `projectdb`.`movie` (
     `rank` FLOAT NULL,
     `summary` MEDIUMTEXT NULL,
     `genre_id` INT NULL,
-    `poster_id` VARCHAR(256) NULL,
+    `poster_id` VARCHAR(45) NULL,
     PRIMARY KEY (`movie_id`)
 );
 
