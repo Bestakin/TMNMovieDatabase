@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,7 +7,7 @@
       name="description"
       content="Tvflix is a movie recommendation app made for my project work. #CAP615"
     />
-    <!-- Favicon -->
+
     <link rel="shortcut icon" href="/favicon.svg" type="image/svg" />
     <script
       src="https://kit.fontawesome.com/64d58efce2.js"
@@ -108,4 +108,43 @@
 
     <script src="app.js"></script>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Signup/Signin Page</title>
+</head>
+<body>
+  <div id="signup">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="button" onclick="signup()">Sign Up</button>
+    </form>
+  </div>
+
+  <div id="signin">
+    <h2>Sign In</h2>
+    <form id="signinForm">
+      <label for="signinUsername">Username:</label>
+      <input type="text" id="signinUsername" name="signinUsername" required>
+
+      <label for="signinPassword">Password:</label>
+      <input type="password" id="signinPassword" name="signinPassword" required>
+
+      <button type="button" onclick="signin()">Sign In</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
