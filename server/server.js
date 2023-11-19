@@ -33,11 +33,28 @@ app.post('/saveData', (req, res) => {
 });
 
 // Endpoint to retrieve data
-app.get('/getData', (req, res) => {
-    // db.query('SELECT * FROM players', (err, rows) => {
-    //     res.json({ data: rows });
-    // });
-    res.json({ data: "FROM SERVER:" });
+app.get('/genres', (req, res) => {
+    db.query('SELECT * FROM genre', (err, rows) => {
+        res.json({ data: rows });
+    });
+});
+
+app.get('/movies', (req, res) => {
+    db.query('SELECT * FROM movie', (err, rows) => {
+        res.json({ data: rows });
+    });
+});
+
+app.get('/movies/top_rated', (req, res) => {
+    db.query('SELECT * FROM movie', (err, rows) => {
+        res.json({ data: rows });
+    });
+});
+
+app.get('/movies/trending', (req, res) => {
+    db.query('SELECT * FROM movie', (err, rows) => {
+        res.json({ data: rows });
+    });
 });
 
 app.listen(port, () => {

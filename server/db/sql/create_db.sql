@@ -8,6 +8,8 @@ CREATE TABLE `projectdb`.`movie` (
     `age_rating` VARCHAR(45) NULL,
     `rank` FLOAT NULL,
     `summary` MEDIUMTEXT NULL,
+    `genre_id` INT NULL,
+    `poster_id` VARCHAR(256) NULL,
     PRIMARY KEY (`movie_id`)
 );
 

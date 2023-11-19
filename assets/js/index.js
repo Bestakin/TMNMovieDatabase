@@ -14,16 +14,12 @@ sidebar();
 // Home page sections (Top rated, Upcoming, Trending Movies)
 const homePageSections = [
     {
-        title: "Upcoming Movies",
-        path: "/movie/upcoming",
-    },
-    {
-        title: "This Week Trending Movies",
-        path: "/trending/movie/week",
+        title: "Trending Movies",
+        path: "movies/trending",
     },
     {
         title: "Top Rated Movies",
-        path: "/movie/top_rated",
+        path: "movies/top_rated",
     },
 ];
 
@@ -43,25 +39,26 @@ const genreList = {
 
 fetchDataFromServer(
     // `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`,
-    "getData",
-    function (data) {
-        // for (const { id, name } of genres) {
-        //     genreList[id] = name;
-        // }
-        //
-        // fetchDataFromServer(
-        //     `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=1`,
-        //     heroBanner
-        // );
+    "genres",
+    function ({data}) {
+        for (const { genre_id, genre_name } of data) {
+            genreList[genre_id] = genre_name;
+        }
 
         console.log(data);
+        fetchDataFromServer(
+            // `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=1`,
+            "movies",
+            heroBanner
+        );
+
 
         // heroBanner(data);
     }
 );
 
-const heroBanner = function ({ results: movieList }) {
-    console.log(movieList);
+const heroBanner = function ({ data }) {
+    console.log(data);
     const banner = document.createElement("section");
     banner.classList.add("banner");
     banner.ariaLabel = "Popular Movies";
@@ -77,17 +74,18 @@ const heroBanner = function ({ results: movieList }) {
 
     let controlItemIndex = 0;
 
-    for (const [index, movie] of movieList.entries()) {
-        const {
-            backdrop_path,
-            title,
-            release_date,
-            genre_ids,
-            overview,
-            poster_path,
-            vote_average,
-            id,
-        } = movie;
+    for (var i=0; i<data.length; ++i){
+        const movie = data[i];
+        // const {
+        //     backdrop_path,
+        //     title,
+        //     release_date,
+        //     genre_ids,
+        //     overview,
+        //     poster_path,
+        //     vote_average,
+        //     id,
+        // } = movie;
 
         const sliderItem = document.createElement("div");
         sliderItem.classList.add("slider-item");
@@ -95,22 +93,22 @@ const heroBanner = function ({ results: movieList }) {
 
         sliderItem.innerHTML = `
         <img
-        src="${imageBaseURL}w1280${backdrop_path}"
-        alt="${title}"
+        src="./assets/images/slider-banner.jpg"
+        alt="${movie.title}"
         class="img-cover"
-        loading="${index === 0 ? "eager" : "lazy"}"
+        loading="${i === 0 ? "eager" : "lazy"}"
         />
         <div class="banner-content">
-        <h2 class="heading">${title}</h2>
+        <h2 class="heading">${movie.title}</h2>
 
         <div class="meta-list">
-        <div class="meta-item">${release_date.split("-")[0]}</div>
-        <div class="meta-item card-badge">${vote_average.toFixed(1)}</div>
+        <div class="meta-item">${movie.year}</div>
+        <div class="meta-item card-badge">${movie.rank}</div>
         </div>
-        <p class="genre">${genreList.asString(genre_ids)}</p>
-        <p class="banner-text">${overview}</p>
+        <p class="genre">${genreList.asString([movie.genre_id])}</p>
+        <p class="banner-text">${movie.summary}</p>
 
-        <a href="./detail.html" class="btn" onclick="getMovieDetail(${id})">
+        <a href="./detail.html" class="btn" onclick="getMovieDetail(${movie.movie_id})">
         <img
         src="./assets/images/play_circle.png"
         width="24"
@@ -133,8 +131,8 @@ const heroBanner = function ({ results: movieList }) {
 
         controlItem.innerHTML = `
         <img
-        src="${imageBaseURL}w154${poster_path}"
-        alt="Slide to ${title}"
+        src="https://cdn.discordapp.com/attachments/1018015986970013697/1175607911699984425/pp_disney_blackpanther_wakandaforever_1289_d3419b8f.jpeg?ex=656bd92f&is=6559642f&hm=1509a1d36f271517dc3a3444b4d813d260f245f805a9266692fd3ed83519e1e6&"
+        alt="Slide to ${movie.title}"
         loading="lazy"
         draggable="false"
         class="img-cover"
@@ -148,11 +146,7 @@ const heroBanner = function ({ results: movieList }) {
 
     // fetch data from home page sections (top rated, upcoming,trending).
     for (const { title, path } of homePageSections) {
-        fetchDataFromServer(
-            `https://api.themoviedb.org/3${path}?api_key=${api_key}&page=1`,
-            createMovieList,
-            title
-        );
+        fetchDataFromServer("movies", createMovieList, title);
     }
 };
 
@@ -194,12 +188,12 @@ const addHeroSlide = function () {
     addEventOnElements(sliderControls, "click", sliderStart);
 };
 
-const createMovieList = function ({ results: movieList }, title) {
+const createMovieList = function ({ data }, title) {
     const movieListElem = document.createElement("section");
     movieListElem.classList.add("movie-list");
     movieListElem.ariaLabel = `${title}`;
 
-    console.log(movieList);
+    console.log(data);
 
     movieListElem.innerHTML = `
     <div class="title-wrapper">
@@ -211,10 +205,9 @@ const createMovieList = function ({ results: movieList }, title) {
     </div>
     `;
 
-    for (const movie of movieList) {
+    for (const movie of data) {
         // Called from movie_card.js
         const movieCard = createMovieCard(movie);
-
         movieListElem.querySelector(".slider-inner").appendChild(movieCard);
     }
     pageContent.appendChild(movieListElem);

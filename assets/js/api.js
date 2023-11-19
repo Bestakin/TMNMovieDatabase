@@ -7,8 +7,8 @@ const imageBaseURL = "https://image.tmdb.org/t/p/";
 
 
 const fetchDataFromServer = function (command, callback, optionalParam) {
-  // const url = "http://localhost:3000/";
-  fetch(command)
+    const url = "http://localhost:3000/";
+    fetch(url+command)
     .then((response) => response.json())
     .then((data) => callback(data, optionalParam));
 };
