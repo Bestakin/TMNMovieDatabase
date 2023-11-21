@@ -38,7 +38,7 @@ app.post('/signup', (req, res) => {
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '2004',
+    password: 'root',
     database: 'projectdb'
 });
 
